@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&family=Schoolbell&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   CUSTOM PROPERTIES (CSS Variables)
+   ======================================== */
+:root {
+  --color-marron-oscuro: #5C3D2E;
+  --color-marron-medio: #8B4513;
+  --color-marron-claro: #D2691E;
+  --color-verde: #6B8E23;
+  --color-verde-oscuro: #556B2F;
+  --color-crema: #FAF7F2;
+  --color-amarillo: #FFD700;
+  --font-titular: 'Caveat', 'Schoolbell', cursive;
+  --font-texto: 'Montserrat', sans-serif;
+}
+
+/* ========================================
+   RESET & BASE STYLES
+   ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-texto);
+  background-color: var(--color-crema);
+  color: var(--color-marron-oscuro);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ========================================
+   UTILITY CLASSES (Custom)
+   ======================================== */
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-dark {
+  background: rgba(92, 61, 46, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(92, 61, 46, 0.2);
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, #6B8E23 0%, #556B2F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-warm {
+  background: linear-gradient(135deg, #D2691E 0%, #8B4513 50%, #5C3D2E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(92, 61, 46, 0.2);
+}
+
+/* 3D card effect */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+/* Shimmer loading effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Section reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-crema);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-verde);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-verde-oscuro);
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-verde);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--color-verde);
+  color: white;
+}
+
+/* ========================================
+   CUSTOM COMPONENTS
+   ======================================== */
+
+/* Modern button styles */
+.btn-primary {
+  @apply bg-verde hover:bg-verde-oscuro text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105;
+}
+
+.btn-secondary {
+  @apply border-2 border-marron-oscuro text-marron-oscuro hover:bg-marron-oscuro hover:text-white font-semibold px-8 py-4 rounded-full transition-all duration-300;
+}
+
+.btn-outline {
+  @apply border-2 border-verde text-verde hover:bg-verde hover:text-white font-semibold px-6 py-3 rounded-full transition-all duration-300;
+}
+
+/* Section padding */
+.section-padding {
+  @apply py-20 md:py-28 lg:py-32;
+}
+
+/* Container with max-width */
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Heading styles */
+.heading-1 {
+  @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-marron-oscuro leading-tight;
+  font-family: var(--font-titular);
+}
+
+.heading-2 {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold text-marron-oscuro leading-tight;
+  font-family: var(--font-titular);
+}
+
+.heading-3 {
+  @apply text-2xl md:text-3xl lg:text-4xl font-bold text-marron-oscuro;
+  font-family: var(--font-titular);
+}
+
+/* ========================================
+   RESPONSIVE UTILITIES
+   ======================================== */
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile menu animation */
+@media (max-width: 768px) {
+  .mobile-menu-enter {
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--color-verde);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
