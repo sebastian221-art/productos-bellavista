@@ -1,184 +1,88 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Award, Leaf, TrendingUp, Shield, Users, Package } from 'lucide-react';
-
-const Ventajas = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const ventajas = [
+export default function Ventajas() {
+  const iconos = [
     {
-      icon: Award,
-      title: 'Certificaciones Internacionales',
-      description: 'Cumplimos con los más altos estándares de calidad reconocidos internacionalmente. Certificaciones ISO y BPM garantizan la excelencia de nuestros productos.',
-      gradient: 'from-verde to-verde-oscuro',
+      title: 'Enfoque Exportador',
+      desc: 'Productos alimenticios preparados para mercados internacionales y compradores mayoristas.',
+      icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="3"/>
+        <path d="M30,50 L45,65 L70,35" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <path d="M50,10 L60,25 M50,10 L40,25" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>`
     },
     {
-      icon: TrendingUp,
-      title: 'Capacidad de Suministro Constante',
-      description: 'Infraestructura y logística robusta para asegurar entregas puntuales. Red de productores consolidada que garantiza volúmenes estables.',
-      gradient: 'from-marron-medio to-marron-oscuro',
+      title: 'Calidad Controlada',
+      desc: 'Procesos estandarizados y selección de materias primas de origen agrícola.',
+      icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="30" width="60" height="50" rx="3" fill="none" stroke="currentColor" stroke-width="3"/>
+        <path d="M30,40 L40,50 L30,60" fill="none" stroke="currentColor" stroke-width="3"/>
+        <line x1="45" y1="45" x2="65" y2="45" stroke="currentColor" stroke-width="3"/>
+        <line x1="45" y1="55" x2="65" y2="55" stroke="currentColor" stroke-width="3"/>
+      </svg>`
     },
     {
-      icon: Leaf,
-      title: 'Origen 100% Natural',
-      description: 'Productos agrícolas auténticos del campo colombiano. Procesos tradicionales combinados con tecnología moderna para preservar calidad.',
-      gradient: 'from-verde-oscuro to-verde',
+      title: 'Capacidad de Suministro',
+      desc: 'Producción constante a volúmenes ajustados a la necesidad del cliente B2B.',
+      icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect x="25" y="40" width="20" height="40" fill="none" stroke="currentColor" stroke-width="3"/>
+        <rect x="50" y="30" width="20" height="50" fill="none" stroke="currentColor" stroke-width="3"/>
+        <line x1="20" y1="85" x2="80" y2="85" stroke="currentColor" stroke-width="3"/>
+      </svg>`
     },
     {
-      icon: Shield,
-      title: 'Experiencia en Exportación',
-      description: '20+ años llevando productos colombianos al mundo. Conocimiento profundo de regulaciones y estándares internacionales de comercio.',
-      gradient: 'from-marron-claro to-marron-medio',
-    },
-    {
-      icon: Users,
-      title: 'Socios Estratégicos Confiables',
-      description: 'Trabajamos con productores locales bajo esquemas de comercio justo. Relaciones de largo plazo que aseguran sostenibilidad y calidad.',
-      gradient: 'from-verde to-marron-medio',
-    },
-    {
-      icon: Package,
-      title: 'Presentaciones Personalizadas',
-      description: 'Adaptamos empaque y presentación a las necesidades de su marca. Flexibilidad en volúmenes y formatos para diferentes mercados.',
-      gradient: 'from-marron-oscuro to-verde-oscuro',
-    },
+      title: 'Private Label',
+      desc: 'Productos sin marca listos para comercializar bajo tu propia identidad.',
+      icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30,20 L50,35 L70,20 L70,65 L30,65 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+        <line x1="40" y1="40" x2="60" y2="40" stroke="currentColor" stroke-width="2"/>
+        <line x1="40" y1="50" x2="60" y2="50" stroke="currentColor" stroke-width="2"/>
+      </svg>`
+    }
   ];
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   return (
-    <section className="section-padding bg-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-green opacity-5 blur-3xl rounded-full" />
-      <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-brown opacity-5 blur-3xl rounded-full" />
-
-      <div className="container-custom relative z-10">
-        
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          ref={ref}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.2 }}
-            className="inline-block text-verde font-semibold text-sm uppercase tracking-wide mb-4"
-          >
-            Ventajas Competitivas
-          </motion.span>
-          
-          <h2 className="heading-2 mb-6">
-            ¿Por qué elegir a{' '}
-            <span className="text-gradient">Panela BellaVista</span>?
+    <section className="relative py-20 bg-crema">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="handwriting-title text-4xl md:text-5xl text-marron mb-6">
+            ¿Por qué elegir Productos Bellavista?
           </h2>
-          
-          <p className="text-lg text-gray-600">
-            Más de dos décadas de experiencia nos respaldan como uno de los exportadores 
-            más confiables de productos agrícolas colombianos.
-          </p>
-        </motion.div>
+          <div className="w-32 h-1 bg-amber-600 mx-auto mb-4"></div>
+        </div>
 
-        {/* Ventajas Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {ventajas.map((ventaja, index) => {
-            const Icon = ventaja.icon;
-            
-            return (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ y: -8 }}
-                className="group relative"
-              >
-                <div className="glass hover:glass-dark p-8 rounded-2xl shadow-warm hover:shadow-warm-lg transition-all duration-300 h-full">
-                  {/* Icon with gradient background */}
-                  <div className="relative inline-block mb-6">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${ventaja.gradient} opacity-20 rounded-2xl blur-xl group-hover:opacity-30 transition-opacity`} />
-                    <div className={`relative p-4 bg-gradient-to-br ${ventaja.gradient} rounded-2xl text-white transform group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className="w-8 h-8" />
-                    </div>
-                  </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {iconos.map((item, index) => (
+            <div key={index} className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow border-2 border-gray-200">
+              <div 
+                className="w-24 h-24 mx-auto mb-4 text-marron"
+                dangerouslySetInnerHTML={{ __html: item.icon }}
+              />
+              <h3 className="handwriting text-xl font-bold text-marron mb-3 text-center">
+                {item.title}
+              </h3>
+              <p className="text-gray-700 text-sm text-center leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
 
-                  {/* Content */}
-                  <h3 className="text-xl font-bold text-marron-oscuro mb-4 font-caveat">
-                    {ventaja.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    {ventaja.description}
-                  </p>
+        <div className="text-center">
+          <p className="handwriting text-xl text-gray-800 mb-6">¿Buscas un proveedor confiable para tu mercado?</p>
+          <a href="https://wa.me/573101234567" target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-verde-oscuro text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-all font-medium">
+            📱 Hablar por Whatsapp
+          </a>
+        </div>
+      </div>
 
-                  {/* Decorative element */}
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-transparent to-verde/5 rounded-bl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
-          className="mt-16 text-center"
-        >
-          <div className="glass inline-block px-8 py-4 rounded-2xl">
-            <p className="text-marron-oscuro font-medium mb-4">
-              ¿Listo para trabajar con un aliado confiable?
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                const element = document.querySelector('#contacto');
-                if (element) {
-                  const offset = 80;
-                  const elementPosition = element.getBoundingClientRect().top;
-                  const offsetPosition = elementPosition + window.pageYOffset - offset;
-                  window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                }
-              }}
-              className="btn-primary"
-            >
-              Solicitar Cotización
-            </motion.button>
-          </div>
-        </motion.div>
+      {/* Ondas decorativas */}
+      <div className="absolute bottom-0 left-0 w-full">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150" className="w-full">
+          <path fill="#F4C430" d="M0,50 Q360,0 720,50 T1440,50 L1440,150 L0,150 Z" opacity="0.5"/>
+          <path fill="#5C7A3C" d="M0,80 Q360,30 720,80 T1440,80 L1440,150 L0,150 Z" opacity="0.3"/>
+          <path fill="#8B7355" d="M0,100 Q360,60 720,100 T1440,100 L1440,150 L0,150 Z"/>
+        </svg>
       </div>
     </section>
   );
-};
-
-export default Ventajas;
+}

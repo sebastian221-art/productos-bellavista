@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Ventajas from './components/Ventajas';
@@ -8,21 +7,14 @@ import Contacto from './components/Contacto';
 import Footer from './components/Footer';
 
 function App() {
-  // Scroll to top on mount
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
-    <div className="App">
+    <div className="min-h-screen">
       <Navbar />
-      <main>
-        <Hero />
-        <Ventajas />
-        <Productos />
-        <Nosotros />
-        <Contacto />
-      </main>
+      <Hero />
+      <Ventajas />
+      <Productos />
+      <Nosotros />
+      <Contacto />
       <Footer />
     </div>
   );

@@ -1,242 +1,102 @@
-import { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Award, Globe, TrendingUp, Leaf } from 'lucide-react';
-
-const Hero = () => {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
-  // Animated counter
-  const [stats, setStats] = useState([
-    { value: 0, target: 20, label: 'Años de experiencia', icon: Award },
-    { value: 0, target: 10, label: 'Países de exportación', icon: Globe },
-    { value: 0, target: 15, label: 'Marcas atendidas', icon: TrendingUp },
-    { value: 0, target: 1500, label: 'Familias alimentadas', icon: Leaf, suffix: '+' },
-  ]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStats(prev => prev.map(stat => ({
-        ...stat,
-        value: stat.value < stat.target ? stat.value + Math.ceil(stat.target / 50) : stat.target
-      })));
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
-  };
-
+export default function Hero() {
   return (
-    <section
-      id="inicio"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-warm pt-20"
-    >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          style={{ y }}
-          className="absolute top-10 right-10 w-72 h-72 bg-verde/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        <motion.div
-          style={{ y: useTransform(scrollY, [0, 500], [0, -100]) }}
-          className="absolute bottom-10 left-10 w-96 h-96 bg-marron-claro/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            rotate: [0, -90, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        
-        {/* Floating decorative elements */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-verde rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+    <section id="inicio" className="relative pt-24 pb-32 bg-crema overflow-hidden">
+      {/* Imagen de fondo con montañas */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-40"
+        style={{
+          backgroundImage: "url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 600%22%3E%3Crect fill=%22%2387CEEB%22 width=%221200%22 height=%22600%22/%3E%3Cpath fill=%22%235C7A3C%22 d=%22M0,400 L200,300 L400,350 L600,280 L800,340 L1000,320 L1200,380 L1200,600 L0,600 Z%22/%3E%3Cpath fill=%22%236B8E23%22 d=%22M0,450 L300,380 L600,400 L900,370 L1200,420 L1200,600 L0,600 Z%22/%3E%3C/svg%3E')"
+        }}
+      ></div>
+
+      {/* Ondas decorativas superiores */}
+      <div className="absolute top-0 left-0 w-full">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="w-full">
+          <path fill="#F4C430" d="M0,20 Q360,0 720,20 T1440,20 L1440,0 L0,0 Z" opacity="0.5"/>
+          <path fill="#5C7A3C" d="M0,40 Q360,20 720,40 T1440,40 L1440,0 L0,0 Z" opacity="0.3"/>
+          <path fill="#F5E6D3" d="M0,60 Q360,40 720,60 T1440,60 L1440,0 L0,0 Z"/>
+        </svg>
       </div>
 
-      <motion.div
-        style={{ opacity }}
-        className="container-custom relative z-10"
-      >
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          
-          {/* Left Column - Content */}
-          <div className="space-y-8">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center space-x-2 glass px-4 py-2 rounded-full"
-            >
-              <Leaf className="w-5 h-5 text-verde" />
-              <span className="text-sm font-medium text-marron-oscuro">
-                🌿 Productos Agrícolas de Origen
-              </span>
-            </motion.div>
-
-            {/* Main Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="heading-1"
-            >
-              Proveedor confiable de{' '}
-              <span className="text-gradient">
-                productos agrícolas
-              </span>
-              {' '}para mercados internacionales
-            </motion.h1>
-
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-lg md:text-xl text-gray-700 leading-relaxed"
-            >
-              Panela, piloncillo, café y otros productos de origen agrícola, con capacidad de 
-              suministro constante, estándares de calidad y experiencia en exportación.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection('#contacto')}
-                className="btn-primary flex items-center justify-center space-x-2 group"
-              >
-                <span>Solicitar información comercial</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection('#productos')}
-                className="btn-outline flex items-center justify-center space-x-2"
-              >
-                <span>Ver productos</span>
-              </motion.button>
-            </motion.div>
-
-            {/* Trust badges */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-wrap gap-6 pt-4"
-            >
-              {['Certificación ISO', 'Exportación Global', 'Calidad Premium'].map((badge, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-verde rounded-full animate-pulse" />
-                  <span className="text-sm font-medium text-marron-medio">{badge}</span>
+          {/* Columna izquierda */}
+          <div>
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <img src="/logo.png" alt="Logo" className="h-20 w-auto" 
+                     onError={(e) => e.target.style.display = 'none'} />
+                <div>
+                  <p className="text-xs text-marron uppercase tracking-widest">PRODUCTOS</p>
+                  <h1 className="text-4xl font-bold text-marron">BellaVista</h1>
                 </div>
-              ))}
-            </motion.div>
+              </div>
+              
+              <p className="text-base text-gray-800 leading-relaxed mb-8">
+                Producción y exportación de panela, piloncillo, café y otros productos agrícolas, 
+                con capacidad de suministro constante y estándares de calidad.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="https://wa.me/573101234567" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-verde-oscuro text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all font-medium">
+                📱 Cotizar por Whatsapp
+              </a>
+              <a href="#productos"
+                className="inline-flex items-center justify-center bg-white text-marron px-6 py-3 rounded-lg border-2 border-marron hover:bg-gray-50 transition-all font-medium">
+                Ver Productos
+              </a>
+            </div>
           </div>
 
-          {/* Right Column - Stats Cards */}
-          <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ delay: 0.7 + index * 0.1 }}
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  className="glass hover:glass-dark p-6 rounded-2xl shadow-warm hover-lift cursor-default"
-                >
-                  <div className="flex flex-col items-center text-center space-y-3">
-                    <div className="p-3 bg-verde/10 rounded-full">
-                      <Icon className="w-6 h-6 text-verde" />
-                    </div>
-                    <div className="text-4xl font-bold text-gradient-warm font-caveat">
-                      {stat.value}{stat.suffix || ''}
-                    </div>
-                    <div className="text-sm font-medium text-gray-600">
-                      {stat.label}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+          {/* Columna derecha - Placeholder imagen */}
+          <div className="relative">
+            <div className="aspect-square rounded-2xl overflow-hidden border-4 border-marron/20 bg-white/50 backdrop-blur">
+              <div className="w-full h-full flex items-center justify-center text-gray-400">
+                <p>Imagen Hero</p>
+              </div>
+            </div>
           </div>
         </div>
-      </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="flex flex-col items-center space-y-2 cursor-pointer"
-          onClick={() => scrollToSection('#productos')}
-        >
-          <span className="text-sm text-gray-600">Desliza para explorar</span>
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-1">
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1.5 h-1.5 bg-verde rounded-full"
-            />
+        {/* Badges certificación */}
+        <div className="mt-16 flex justify-center gap-6">
+          <div className="text-center">
+            <div className="w-28 h-28 mx-auto rounded-full bg-green-800 text-white flex items-center justify-center border-4 border-white shadow-lg">
+              <div className="text-center">
+                <div className="text-2xl">🌍</div>
+                <p className="text-[10px] font-bold mt-1">EXPORTACIÓN</p>
+              </div>
+            </div>
           </div>
-        </motion.div>
-      </motion.div>
+          <div className="text-center">
+            <div className="w-28 h-28 mx-auto bg-yellow-400 text-marron flex items-center justify-center border-4 border-white shadow-lg" 
+                 style={{clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)'}}>
+              <div className="text-center">
+                <p className="text-[9px] font-bold leading-tight">CALIDAD<br/>CERTIFICADA</p>
+              </div>
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="w-28 h-28 mx-auto rounded-full bg-marron text-white flex items-center justify-center border-4 border-white shadow-lg">
+              <div className="text-center">
+                <div className="text-2xl">☕</div>
+                <p className="text-[9px] font-bold mt-1 leading-tight">ABASTECIMIENTO<br/>GARANTIZADO</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Ondas decorativas inferiores */}
+      <div className="absolute bottom-0 left-0 w-full">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150" className="w-full">
+          <path fill="#F4C430" d="M0,50 Q360,0 720,50 T1440,50 L1440,150 L0,150 Z" opacity="0.5"/>
+          <path fill="#5C7A3C" d="M0,80 Q360,30 720,80 T1440,80 L1440,150 L0,150 Z" opacity="0.3"/>
+          <path fill="#F5E6D3" d="M0,100 Q360,60 720,100 T1440,100 L1440,150 L0,150 Z"/>
+        </svg>
+      </div>
     </section>
   );
-};
-
-export default Hero;
+}
